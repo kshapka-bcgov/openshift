@@ -1,0 +1,21 @@
+apiVersion: tekton.dev/v1beta1
+kind: TaskRun
+metadata:
+  generateName: curl-header-run-
+  namespace: 23576a-tools
+spec:
+  params:
+    - name: url
+      value: >-
+        https://chat.developer.gov.bc.ca/hooks/[[token]]
+    - name: options
+      value:
+        - "-X"
+        - "POST"
+        - "-H"
+        - "Content-Type: application/json"
+        - "--data"
+        - '{"text":"Example message","attachments":[{"title":"Our very first alerts","text":"This is a test run","color":"#764FA5"}]}'
+
+  taskRef:
+    name: curl
