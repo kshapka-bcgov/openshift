@@ -1,0 +1,31 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: curl-pipeline-run-
+spec:
+  serviceAccountName: pipeline
+  pipelineRef:
+    name: curl-pipeline
+  params:
+    - name: url-secret
+      value: teams-url
+    - name: options
+      value:
+        - "-X"
+        - "POST"
+        - "-H"
+        - "Content-Type: application/json"
+        - "--data"
+        - |-
+          {
+              "@context": "https://schema.org/extensions",
+              "@type": "MessageCard",
+              "sections": [
+                  {
+                      "text": "This is ANOTHER test of the DESCW CI/CO Alerts system."
+                  }
+              ],
+              "summary": "DESCW Automated CI/CO Alert",
+              "themeColor": "0072C6",
+              "title": "DESCW Automated CI/CO Alert"
+          }
