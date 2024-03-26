@@ -16,4 +16,4 @@ spec:
         - "-H"
         - "Content-Type: application/json"
         - "--data"
-        - '{"text":"Example message","attachments":[{"title":"Testing removing some quotation marks","text":"Turns out you do not need them.","color":"#764FA5"}]}'
+        - '{"text":"Automated Alert","attachments":[{"title":"A very thoughtful title","text":"Some intriguing text.","color":"#764FA5"}]}'
