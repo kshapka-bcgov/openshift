@@ -1,0 +1,23 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: curl-pipeline
+  labels:
+    name: curl-pipeline
+spec:
+  params:
+    - name: url-secret
+      description: Name of the secret which holds the URL to be curl'ed.
+      type: string
+    - name: options
+      description: Options for the url command.
+      type: array
+  tasks:
+    - name: curl
+      taskRef:
+        name: curl
+      params:
+        - name: url-secret
+          value: $(params.url-secret)
+        - name: options
+          value: $(params.options[*])

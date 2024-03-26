@@ -12,21 +12,25 @@ metadata:
 spec:
   description: >-
     This task performs curl operation to transfer data from internet.
-
-
   params:
-  - name: url
-    description: URL to curl'ed
-    type: string
-    description: options of url
-    type: array
-    default: []
-  - name: curl-image
-    description: option of curl image
-    type: string
-    default: "docker.io/curlimages/curl:7.72.0@sha256:bd5bbd35f89b867c1dccbc84b8be52f3f74dea20b46c5fe0db3780e040afcb6f" #tag: 7.72.0
+    - name: url-secret
+      description: Name of the secret which holds the URL to be curl'ed.
+      type: string
+    - name: options
+      description: Options for the url command.
+      type: array
+    - name: curl-image
+      description: Image of curl to pull.
+      type: string
+      default: "docker.io/curlimages/curl:7.72.0@sha256:bd5bbd35f89b867c1dccbc84b8be52f3f74dea20b46c5fe0db3780e040afcb6f" #tag: 7.72.0
   steps:
-  - name: curl
-    image: "$(params.curl-image)"
-    command: [curl]
-    args: ["$(params.options[*])", "$(params.url)"]
+    - name: curl
+      image: "$(params.curl-image)"
+      env:
+      - name: URL
+        valueFrom:
+          secretKeyRef:
+            name: $(params.url-secret)
+            key: url
+      command: [curl]
+      args: ["$(params.options[*])", $(URL)]

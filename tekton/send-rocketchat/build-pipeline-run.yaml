@@ -1,0 +1,19 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: curl-pipeline-run-
+spec:
+  serviceAccountName: pipeline
+  pipelineRef:
+    name: curl-pipeline
+  params:
+    - name: url-secret
+      value: rocketchat-url
+    - name: options
+      value:
+        - "-X"
+        - "POST"
+        - "-H"
+        - "Content-Type: application/json"
+        - "--data"
+        - '{"text":"Example message","attachments":[{"title":"Testing removing some quotation marks","text":"Turns out you do not need them.","color":"#764FA5"}]}'
