@@ -16,4 +16,14 @@ spec:
         - "-H"
         - "Content-Type: application/json"
         - "--data"
-        - '{"text":"Automated Alert","attachments":[{"title":"A very thoughtful title","text":"Some intriguing text.","color":"#764FA5"}]}'
+        - |-
+          {
+            "text": "Automated Alert",
+            "attachments": [
+              {
+                "title": "A very thoughtful title",
+                "text": "Some intriguing text.",
+                "color": "#764FA5"
+              }
+            ]
+          }
