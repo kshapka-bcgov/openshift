@@ -20,27 +20,7 @@ jobs:
         with:
           version: "latest"
           openshift_server_url: ${{ secrets.OpenShiftServerURL }}
-          parameters: |-
-            - name: url-secret
-              value: rocketchat-url
-            - name: options
-              value:
-                - "-X"
-                - "POST"
-                - "-H"
-                - "Content-Type: application/json"
-                - "--data"
-                - |-
-                  {
-                    "text": "Automated Alert",
-                    "attachments": [
-                      {
-                        "title": "A very thoughtful title",
-                        "text": "Some intriguing text.",
-                        "color": "#764FA5"
-                      }
-                    ]
-                  }
+          parameters: '{"apitoken": "${{ secrets.OpenShiftToken }}", "acceptUntrustedCerts": "true"}'
           cmd: |
             oc project c345c5-tools
-            oc create 
+            curl-pipeline-run-axzaoa
