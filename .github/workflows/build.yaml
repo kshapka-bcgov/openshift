@@ -49,7 +49,7 @@ jobs:
                         "text": "Automated Alert",
                         "attachments": [
                           {
-                            "title": "A very thoughtful title",
+                            "title": "App updated and Built",
                             "text": "Some intriguing text.",
                             "color": "#764FA5"
                           }
