@@ -1,0 +1,46 @@
+name: Build API Image.
+on:
+  push:
+    branches:
+      - development
+    paths:
+      - "src/**"
+
+  workflow_dispatch:
+defaults:
+  run:
+    working-directory: ./
+jobs:
+  deploy_api_on_openshift:
+    if: github.repository_owner == 'kshapka-bcgov'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Curl message to notify repo has been updated.
+        uses: redhat-developer/openshift-actions@v1.1
+        with:
+          version: "latest"
+          openshift_server_url: ${{ secrets.OpenShiftServerURL }}
+          parameters: |-
+            - name: url-secret
+              value: rocketchat-url
+            - name: options
+              value:
+                - "-X"
+                - "POST"
+                - "-H"
+                - "Content-Type: application/json"
+                - "--data"
+                - |-
+                  {
+                    "text": "Automated Alert",
+                    "attachments": [
+                      {
+                        "title": "A very thoughtful title",
+                        "text": "Some intriguing text.",
+                        "color": "#764FA5"
+                      }
+                    ]
+                  }
+          cmd: |
+            oc project c345c5-tools
+            oc create 
