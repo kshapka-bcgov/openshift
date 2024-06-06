@@ -10,23 +10,21 @@ spec:
     - name: generate
       image: alpine
       script: |
-        echo - name: url-secret
-                  value: rocketchat-url
-                - name: options
-                  value:
-                    - "-X"
-                    - "POST"
-                    - "-H"
-                    - "Content-Type: application/json"
-                    - "--data"
-                    - |-
+        echo - name: options
+               value:
+                - "-X"
+                - "POST"
+                - "-H"
+                - "Content-Type: application/json"
+                - "--data"
+                - |-
+                  {
+                    "text": "Automated Alert",
+                    "attachments": [
                       {
-                        "text": "Automated Alert",
-                        "attachments": [
-                          {
-                            "title": "App updated and Built",
-                            "text": "Some intriguing text.",
-                            "color": "#764FA5"
-                          }
-                        ]
-                      } > /tekton/results/output
+                        "title": "App updated and Built",
+                        "text": "Some intriguing text.",
+                        "color": "#764FA5"
+                      }
+                    ]
+                  } > /tekton/results/output
