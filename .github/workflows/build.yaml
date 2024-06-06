@@ -15,7 +15,7 @@ jobs:
     if: github.repository_owner == 'kshapka-bcgov'
     runs-on: ubuntu-latest
     steps:
-      - name: Curl message to notify repo has been updated.
+      - name: Login to OpenShift and open the correct namespace
         uses: redhat-developer/openshift-actions@v1.1
         with:
           version: "latest"
@@ -23,4 +23,36 @@ jobs:
           parameters: '{"apitoken": "${{ secrets.OpenShiftToken }}", "acceptUntrustedCerts": "true"}'
           cmd: |
             oc project c345c5-tools
-            oc create -f curl-pipeline-run.yaml
+      - name: Create PipelineRun
+        run: |
+            cat <<EOF | oc create -f -
+            apiVersion: tekton.dev/v1beta1
+            kind: PipelineRun
+            metadata:
+              generateName: curl-pipeline-run-
+            spec:
+              serviceAccountName: pipeline
+              pipelineRef:
+                name: curl-pipeline
+              params:
+                - name: url-secret
+                  value: rocketchat-url
+                - name: options
+                  value:
+                    - "-X"
+                    - "POST"
+                    - "-H"
+                    - "Content-Type: application/json"
+                    - "--data"
+                    - |-
+                      {
+                        "text": "Automated Alert",
+                        "attachments": [
+                          {
+                            "title": "A very thoughtful title",
+                            "text": "Some intriguing text.",
+                            "color": "#764FA5"
+                          }
+                        ]
+                      }
+            EOF
