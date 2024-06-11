@@ -29,7 +29,7 @@ jobs:
               apiVersion: tekton.dev/v1beta1
               kind: PipelineRun
               metadata:
-                name: send-message-pipelinerun-3u7z0o
+                generateName: send-message-pipelinerun-
                 namespace: c345c5-tools
                 labels:
                   tekton.dev/pipeline: send-message-pipeline
