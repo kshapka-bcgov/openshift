@@ -1,0 +1,16 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: generate-message
+  namespace: c345c5-tools
+spec:
+  results:
+    - description: The message to be sent to Rocket.Chat
+      name: message
+      type: string
+  steps:
+    - image: alpine
+      name: generate
+      resources: {}
+      script: >
+        echo '{"alias": "DESCW OC Alerts", "text": "Build failed"}' > /tekton/results/message
