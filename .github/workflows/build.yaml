@@ -38,21 +38,22 @@ jobs:
                 - name: url-secret
                   value: rocketchat-url
                 - name: options
-                  value:
-                    - "-X"
-                    - "POST"
-                    - "-H"
-                    - "Content-Type: application/json"
-                    - "--data"
-                    - |-
-                      {
-                        "text": "Automated Alert",
-                        "attachments": [
+                  value: |
+                    [
+                      "-X",
+                      "POST",
+                      "-H",
+                      "Content-Type: application/json",
+                      "--data",
+                      "{
+                        \"text\": \"Automated Alert\",
+                        \"attachments\": [
                           {
-                            "title": "App updated and Built",
-                            "text": "Some intriguing text.",
-                            "color": "#764FA5"
+                            \"title\": \"A very thoughtful title\",
+                            \"text\": \"Some intriguing text.\",
+                            \"color\": \"#764FA5\"
                           }
                         ]
-                      }
+                      }"
+                    ]
             EOF
