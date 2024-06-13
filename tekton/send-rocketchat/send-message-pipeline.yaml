@@ -9,10 +9,10 @@ spec:
       name: rocketchat-url-secret
       type: string
   tasks:
-    - name: generate-message
+    - name: start-build
       taskRef:
         kind: Task
-        name: generate-message
+        name: start-build
     - name: send-to-rocketchat
       params:
         - name: url-secret
@@ -23,10 +23,11 @@ spec:
             - POST
             - '-H'
             - 'Content-Type: application/json'
+            - '-v'
             - '--data'
-            - $(tasks.generate-message.results.message)
+            - '{"alias": "DESCW OC Alerts", "text": "Build succeeded"}'
       runAfter:
-        - generate-message
+        - start-build
       taskRef:
         kind: Task
         name: curl
