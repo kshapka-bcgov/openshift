@@ -1,0 +1,16 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: start-build
+spec:
+  results:
+    - description: Output of the start-build command
+      name: build-output
+      type: string
+  steps:
+    - image: 'quay.io/openshift/origin-cli:latest'
+      name: start-build
+      resources: {}
+      script: |
+        BUILD_OUTPUT=$(oc start-build notify-bc --wait)
+        echo -n $BUILD_OUTPUT > $(results.build-output.path)
