@@ -28,4 +28,4 @@ jobs:
 
       - name: Create PipelineRun
         run: |
-          oc create -f .github/pipelines/pipelinerun.yaml
+          oc create -f .github/pipelines/build-pipelinerun.yaml
