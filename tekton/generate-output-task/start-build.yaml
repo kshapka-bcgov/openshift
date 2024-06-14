@@ -1,23 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
-  creationTimestamp: '2024-06-11T23:59:37Z'
-  generation: 4
-  managedFields:
-    - apiVersion: tekton.dev/v1beta1
-      fieldsType: FieldsV1
-      fieldsV1:
-        'f:spec':
-          .: {}
-          'f:results': {}
-          'f:steps': {}
-      manager: Mozilla
-      operation: Update
-      time: '2024-06-12T00:56:43Z'
   name: start-build
-  namespace: c345c5-tools
-  resourceVersion: '10304748434'
-  uid: 46166167-aaf6-4c52-a003-9a493fb13dc0
 spec:
   results:
     - description: Output of the start-build command
