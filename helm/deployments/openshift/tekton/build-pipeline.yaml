@@ -26,7 +26,7 @@ spec:
             - '--data'
             - >-
               {"alias": "DESCW OC Alerts", "text":
-              "$(tasks.start-build.results.build-output)"}
+              "$(tasks.start-build.results.exit-status)"}
       runAfter:
         - start-build
       taskRef:

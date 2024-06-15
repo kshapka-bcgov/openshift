@@ -10,7 +10,7 @@ spec:
     - name: rocketchat-url-secret
       value: rocketchat-url
   pipelineRef:
-    name: build-pipeline
+    name: example-build-pipeline
   serviceAccountName: pipeline
   timeouts:
     pipeline: 1h0m0s
