@@ -8,7 +8,7 @@ spec:
     name: curl-pipeline
   params:
     - name: url-secret
-      value: rocketchat-url
+      value: notification-credentials
     - name: options
       value:
         - "-X"
